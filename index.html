@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NolannaxStudio</title>
   <style>
+    /* ----- STYLE GLOBAL ----- */
     body {
       margin: 0;
       font-family: "Poppins", sans-serif;
@@ -18,9 +19,9 @@
       text-align: center;
       padding: 20px;
       font-size: 2em;
+      letter-spacing: 2px;
       font-weight: bold;
       text-transform: uppercase;
-      letter-spacing: 2px;
       animation: fadeDown 1s ease-in-out;
     }
 
@@ -39,8 +40,8 @@
       padding: 10px 20px;
       border-radius: 25px;
       cursor: pointer;
-      font-weight: bold;
       transition: all 0.3s;
+      font-weight: bold;
     }
 
     nav button:hover {
@@ -117,6 +118,54 @@
       transition: width 1s linear;
     }
 
+    /* Page Coming Soon */
+    #coming-soon {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    #countdown {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .time-box {
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 15px 25px;
+      min-width: 100px;
+    }
+
+    .value {
+      font-size: 48px;
+      font-weight: 700;
+    }
+
+    .label {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    #alertBtn, #devBtn {
+      margin-top: 25px;
+      padding: 10px 25px;
+      border-radius: 6px;
+      border: none;
+      background: #1abc9c;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #alertBtn:hover, #devBtn:hover {
+      background: white;
+      color: black;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -129,19 +178,35 @@
   </style>
 </head>
 <body>
-  <header>NolannaxStudio</header>
 
-  <nav>
-    <button onclick="showPage('home')">Accueil</button>
-    <button onclick="showPage('downloads')">Téléchargement</button>
-    <button onclick="showPage('contact')">Contact</button>
-  </nav>
-
-  <!-- PAGE ACCUEIL -->
-  <div id="home" class="page active">
-    <h2>Bienvenue sur NolannaxStudio 🌟</h2>
-    <p>Découvrez nos outils exclusifs et nos créations !</p>
+  <!-- PAGE COMPTE À REBOURS -->
+  <div id="coming-soon">
+    <h1>🚧 NolannaxStudio arrive bientôt 🚧</h1>
+    <div id="countdown">
+      <div class="time-box"><div class="value" id="days">00</div><div class="label">Jours</div></div>
+      <div class="time-box"><div class="value" id="hours">00</div><div class="label">Heures</div></div>
+      <div class="time-box"><div class="value" id="minutes">00</div><div class="label">Minutes</div></div>
+      <div class="time-box"><div class="value" id="seconds">00</div><div class="label">Secondes</div></div>
+    </div>
+    <button id="alertBtn">M'alerter</button>
+    <button id="devBtn">Accès développeur</button>
   </div>
+
+  <!-- SITE PRINCIPAL -->
+  <div id="main-site" style="display:none;">
+    <header>NolannaxStudio</header>
+
+    <nav>
+      <button onclick="showPage('home')">Accueil</button>
+      <button onclick="showPage('downloads')">Téléchargement</button>
+      <button onclick="showPage('contact')">Contact</button>
+    </nav>
+
+    <!-- PAGE D'ACCUEIL -->
+    <div id="home" class="page active">
+      <h2>Bienvenue sur NolannaxStudio 🌟</h2>
+      <p>Bienvenue dans notre studio numérique. Découvrez nos outils exclusifs et nos créations.</p>
+    </div>
 
   <!-- PAGE TÉLÉCHARGEMENT -->
   <div id="downloads" class="page">
@@ -151,37 +216,82 @@
     </div>
   </div>
 
-  <!-- PAGE DU FICHIER -->
-  <div id="filePage" class="page">
-    <h2 id="fileName">Nom du fichier</h2>
-    <p>⏱️ Temps avant téléchargement : <span id="timer">05:00</span></p>
-
-    <div class="progress-bar">
-      <div id="progress" class="progress"></div>
+    <!-- PAGE DU FICHIER -->
+    <div id="filePage" class="page">
+      <h2 id="fileName">Nom du fichier</h2>
+      <p>⏱️ Temps avant téléchargement : <span id="timer">05:00</span></p>
+      <div class="progress-bar"><div id="progress" class="progress"></div></div>
+      <button id="downloadBtn" class="download" disabled>Télécharger</button><br><br>
+      <button onclick="showPage('downloads')">⬅ Retour</button>
     </div>
 
-    <button id="downloadBtn" class="download" disabled>Télécharger</button><br><br>
-    <button onclick="showPage('downloads')">⬅ Retour</button>
-  </div>
+    <!-- PAGE CONTACT -->
+    <div id="contact" class="page">
+      <h2>📬 Contact</h2>
+      <p>Discord : <strong>@nolannaxstudio</strong></p>
+      <p>Email : <strong>contact@nolannaxstudio.com</strong></p>
+    </div>
 
-  <!-- PAGE CONTACT -->
-  <div id="contact" class="page">
-    <h2>📬 Contact</h2>
-    <p>Discord : <strong>@nolannaxstudio</strong></p>
-    <p>Email : <strong>contact@nolannaxstudio.com</strong></p>
+    <footer>
+      © 2025 NolannaxStudio | Tous droits réservés.
+    </footer>
   </div>
-
-  <footer>
-    © 2025 NolannaxStudio | Tous droits réservés.
-  </footer>
 
   <script>
-    function showPage(pageId) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById(pageId).classList.add('active');
+    // -------- COMPTE À REBOURS --------
+    const targetDate = new Date("2025-11-08T15:00:00Z"); // Samedi 8 à 16h FR (15h UTC)
+    const comingSoon = document.getElementById("coming-soon");
+    const mainSite = document.getElementById("main-site");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = Math.floor((targetDate - now) / 1000);
+      const days = Math.max(0, Math.floor(diff / 86400));
+      const hours = Math.max(0, Math.floor((diff % 86400) / 3600));
+      const mins = Math.max(0, Math.floor((diff % 3600) / 60));
+      const secs = Math.max(0, diff % 60);
+
+      document.getElementById("days").textContent = days.toString().padStart(2, "0");
+      document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+      document.getElementById("minutes").textContent = mins.toString().padStart(2, "0");
+      document.getElementById("seconds").textContent = secs.toString().padStart(2, "0");
+
+      if (diff <= 0) {
+        comingSoon.style.display = "none";
+        mainSite.style.display = "block";
+        clearInterval(timer);
+      }
     }
 
-    // --- Téléchargement avec compteur ---
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // -------- ACCÈS DÉVELOPPEUR --------
+    document.getElementById("devBtn").addEventListener("click", () => {
+      const code = prompt("Entre le code développeur :");
+      if (code === "8965") {
+        alert("Accès autorisé !");
+        comingSoon.style.display = "none";
+        mainSite.style.display = "block";
+      } else {
+        alert("Code incorrect.");
+      }
+    });
+
+    // -------- ALERT EMAIL (factice) --------
+    document.getElementById("alertBtn").addEventListener("click", () => {
+      const email = prompt("Entre ton email pour être alerté à l’ouverture :");
+      if (email && /\S+@\S+\.\S+/.test(email)) alert("Tu seras alerté à l’ouverture !");
+      else if (email) alert("Email invalide.");
+    });
+
+    // -------- NAVIGATION INTERNE --------
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+    }
+
+    // -------- TÉLÉCHARGEMENT AVEC COMPTE À REBOURS --------
     let countdown;
     function openFile(name, url) {
       showPage('filePage');
@@ -198,16 +308,11 @@
       countdown = setInterval(() => {
         const min = Math.floor(timeLeft / 60);
         const sec = timeLeft % 60;
-        document.getElementById('timer').textContent =
-          `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-
-        const elapsed = (5 * 60 - timeLeft);
-        const percent = (elapsed / (5 * 60)) * 100;
-        progress.style.width = percent + "%";
+        document.getElementById('timer').textContent = `${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+        progress.style.width = ((5 * 60 - timeLeft) / (5 * 60)) * 100 + "%";
 
         if (timeLeft <= 0) {
           clearInterval(countdown);
-          document.getElementById('timer').textContent = "00:00";
           document.getElementById('downloadBtn').disabled = false;
           document.getElementById('downloadBtn').textContent = "Télécharger maintenant";
           document.getElementById('downloadBtn').onclick = () => window.location.href = url;
