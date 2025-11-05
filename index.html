@@ -30,6 +30,7 @@ header {
 nav {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 20px;
   background: rgba(0, 0, 0, 0.3);
   padding: 15px;
@@ -82,23 +83,6 @@ nav button:hover {
   background-color: rgba(255,255,255,0.15);
 }
 
-/* BOUTONS DE TÉLÉCHARGEMENT */
-button.download {
-  background-color: #1abc9c;
-  border: none;
-  padding: 10px 20px;
-  color: white;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button.download:disabled {
-  background-color: gray;
-  cursor: not-allowed;
-}
-
 /* FOOTER */
 footer {
   text-align: center;
@@ -131,8 +115,8 @@ footer {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* centre verticalement */
-  align-items: center;     /* centre horizontalement */
+  justify-content: center;
+  align-items: center;
   text-align: center;
   color: white;
   overflow: hidden;
@@ -175,6 +159,7 @@ footer {
   border-radius: 12px;
   padding: 15px 25px;
   min-width: 100px;
+  backdrop-filter: blur(5px);
 }
 
 .value {
@@ -223,7 +208,8 @@ footer {
 
 <div id="coming-soon">
   <video id="backgroundVideo" autoplay muted loop playsinline>
-    <source src="Minuteur.mkv" type="video/mp4">
+    <source src="Minuteur.mp4" type="video/mp4">
+    Votre navigateur ne supporte pas la lecture de vidéo.
   </video>
 
   <div class="coming-content">
@@ -239,150 +225,147 @@ footer {
   </div>
 </div>
 
+<!-- SITE PRINCIPAL -->
+<div id="main-site" style="display:none;">
+  <header>NolannaxStudio</header>
 
+  <nav>
+    <button onclick="showPage('home')">Accueil</button>
+    <button onclick="showPage('downloads')">Téléchargement</button>
+    <button onclick="showPage('contact')">Contact</button>
+  </nav>
 
-
-  <!-- SITE PRINCIPAL -->
-  <div id="main-site" style="display:none;">
-    <header>NolannaxStudio</header>
-
-    <nav>
-      <button onclick="showPage('home')">Accueil</button>
-      <button onclick="showPage('downloads')">Téléchargement</button>
-      <button onclick="showPage('contact')">Contact</button>
-    </nav>
-
-    <!-- PAGE D'ACCUEIL -->
-    <div id="home" class="page active">
-      <h2>Bienvenue sur NolannaxStudio 🌟</h2>
-      <p>Bienvenue dans notre studio numérique. Découvrez nos outils exclusifs et nos créations.</p>
-    </div>
+  <!-- PAGE D'ACCUEIL -->
+  <div id="home" class="page active">
+    <h2>Bienvenue sur NolannaxStudio 🌟</h2>
+    <p>Bienvenue dans notre studio numérique. Découvrez nos outils exclusifs et nos créations.</p>
+  </div>
 
   <!-- PAGE TÉLÉCHARGEMENT -->
-<div id="downloads" class="page">
-  <h2>📦 Fichiers disponibles</h2>
+  <div id="downloads" class="page">
+    <h2>📦 Fichiers disponibles</h2>
 
-  <div class="file-card" onclick="openFile('AutoClicker.exe', 'https://mega.nz/file/prU2ySJA#xMVSLYxOV4bHLwsOGSBpyRLGemTlD39wm4asgZfukn4')">
-    ⚙️ AutoClicker.exe
-  </div>
-<h2>📦 Fichiers Roblox_Studio disponibles</h2>
-  <div class="file-card" onclick="openFile('Shoot a brainrot', 'https://mega.nz/file/hqcQgbpD#iyPksPJlXB7K0fA3VRwF5ObV-lpnQtfSM94iuE8ThKw')">
-    🧠 Shoot a brainrot
+    <div class="file-card" onclick="openFile('AutoClicker.exe', 'https://mega.nz/file/prU2ySJA#xMVSLYxOV4bHLwsOGSBpyRLGemTlD39wm4asgZfukn4')">
+      ⚙️ AutoClicker.exe
+    </div>
+
+    <h2>📦 Fichiers Roblox Studio disponibles</h2>
+    <div class="file-card" onclick="openFile('Shoot a brainrot', 'https://mega.nz/file/hqcQgbpD#iyPksPJlXB7K0fA3VRwF5ObV-lpnQtfSM94iuE8ThKw')">
+      🧠 Shoot a brainrot
+    </div>
+
+    <div class="file-card" onclick="openFile('Find the Button', 'https://mega.nz/file/Mv1gTCSS#YaKV4_GMyN3HkRwn3OfJByo7AGVyjH8oVUrcZon4ECw')">
+      🔘 Find the Button
+    </div>
+
+    <h2>🎬 Films disponibles</h2>
   </div>
 
-  <div class="file-card" onclick="openFile('Find the Button', 'https://mega.nz/file/Mv1gTCSS#YaKV4_GMyN3HkRwn3OfJByo7AGVyjH8oVUrcZon4ECw')">
-    🔘 Find the Button
-    
+  <!-- PAGE DU FICHIER -->
+  <div id="filePage" class="page">
+    <h2 id="fileName">Nom du fichier</h2>
+    <p>⏱️ Temps avant téléchargement : <span id="timer">05:00</span></p>
+    <div class="progress-bar"><div id="progress" class="progress"></div></div>
+    <button id="downloadBtn" class="download" disabled>Télécharger</button><br><br>
+    <button onclick="showPage('downloads')">⬅ Retour</button>
   </div>
-    <h2>📦 FILM disponibles</h2>
+
+  <!-- PAGE CONTACT -->
+  <div id="contact" class="page">
+    <h2>📬 Contact</h2>
+    <p>Discord : <strong>nolannax_</strong></p>
+    <p>Email : <strong>contact@nolannaxstudio.com</strong></p>
+  </div>
+
+  <footer>
+    © 2025 NolannaxStudio | Tous droits réservés.
+  </footer>
 </div>
-    
 
-    <!-- PAGE DU FICHIER -->
-    <div id="filePage" class="page">
-      <h2 id="fileName">Nom du fichier</h2>
-      <p>⏱️ Temps avant téléchargement : <span id="timer">05:00</span></p>
-      <div class="progress-bar"><div id="progress" class="progress"></div></div>
-      <button id="downloadBtn" class="download" disabled>Télécharger</button><br><br>
-      <button onclick="showPage('downloads')">⬅ Retour</button>
-    </div>
+<script>
+/* -------- COMPTE À REBOURS PRINCIPAL -------- */
+const targetDate = new Date("2025-11-08T15:00:00Z");
+const comingSoon = document.getElementById("coming-soon");
+const mainSite = document.getElementById("main-site");
 
-    <!-- PAGE CONTACT -->
-    <div id="contact" class="page">
-      <h2>📬 Contact</h2>
-      <p>Discord : <strong>nolannax_</strong></p>
-      <p>Email : <strong>contact@nolannaxstudio.com</strong></p>
-    </div>
+function updateCountdown() {
+  const now = new Date();
+  const diff = Math.floor((targetDate - now) / 1000);
+  const days = Math.max(0, Math.floor(diff / 86400));
+  const hours = Math.max(0, Math.floor((diff % 86400) / 3600));
+  const mins = Math.max(0, Math.floor((diff % 3600) / 60));
+  const secs = Math.max(0, diff % 60);
 
-    <footer>
-      © 2025 NolannaxStudio | Tous droits réservés.
-    </footer>
-  </div>
+  document.getElementById("days").textContent = days.toString().padStart(2, "0");
+  document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+  document.getElementById("minutes").textContent = mins.toString().padStart(2, "0");
+  document.getElementById("seconds").textContent = secs.toString().padStart(2, "0");
 
-  <script>
-    // -------- COMPTE À REBOURS --------
-    const targetDate = new Date("2025-11-08T15:00:00Z"); // Samedi 8 à 16h FR (15h UTC)
-    const comingSoon = document.getElementById("coming-soon");
-    const mainSite = document.getElementById("main-site");
+  if (diff <= 0) {
+    comingSoon.style.display = "none";
+    mainSite.style.display = "block";
+    clearInterval(timer);
+  }
+}
 
-    function updateCountdown() {
-      const now = new Date();
-      const diff = Math.floor((targetDate - now) / 1000);
-      const days = Math.max(0, Math.floor(diff / 86400));
-      const hours = Math.max(0, Math.floor((diff % 86400) / 3600));
-      const mins = Math.max(0, Math.floor((diff % 3600) / 60));
-      const secs = Math.max(0, diff % 60);
+const timer = setInterval(updateCountdown, 1000);
+updateCountdown();
 
-      document.getElementById("days").textContent = days.toString().padStart(2, "0");
-      document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
-      document.getElementById("minutes").textContent = mins.toString().padStart(2, "0");
-      document.getElementById("seconds").textContent = secs.toString().padStart(2, "0");
+/* -------- ACCÈS DÉVELOPPEUR -------- */
+document.getElementById("devBtn").addEventListener("click", () => {
+  const code = prompt("Entre le code développeur :");
+  if (code === "8965") {
+    alert("Accès autorisé !");
+    comingSoon.style.display = "none";
+    mainSite.style.display = "block";
+  } else {
+    alert("Code incorrect.");
+  }
+});
 
-      if (diff <= 0) {
-        comingSoon.style.display = "none";
-        mainSite.style.display = "block";
-        clearInterval(timer);
-      }
-    }
+/* -------- Alerte mail -------- */
+document.getElementById("alertBtn").addEventListener("click", () => {
+  const email = prompt("Entre ton email pour être alerté à l’ouverture :");
+  if (email && /\S+@\S+\.\S+/.test(email)) alert("Tu seras alerté à l’ouverture !");
+  else if (email) alert("Email invalide.");
+});
 
-    const timer = setInterval(updateCountdown, 1000);
-    updateCountdown();
+/* -------- NAVIGATION -------- */
+function showPage(pageId) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(pageId).classList.add("active");
+}
 
-    // -------- ACCÈS DÉVELOPPEUR --------
-    document.getElementById("devBtn").addEventListener("click", () => {
-      const code = prompt("Entre le code développeur :");
-      if (code === "8965") {
-        alert("Accès autorisé !");
-        comingSoon.style.display = "none";
-        mainSite.style.display = "block";
-      } else {
-        alert("Code incorrect.");
-      }
-    });
+/* -------- TÉLÉCHARGEMENT AVEC TIMER -------- */
+let countdown;
+function openFile(name, url) {
+  showPage('filePage');
+  document.getElementById('fileName').textContent = "Téléchargement : " + name;
+  document.getElementById('downloadBtn').disabled = true;
+  document.getElementById('downloadBtn').textContent = "En attente...";
+  document.getElementById('timer').textContent = "05:00";
+  document.getElementById('progress').style.width = "0%";
 
-    // -------- ALERT EMAIL (factice) --------
-    document.getElementById("alertBtn").addEventListener("click", () => {
-      const email = prompt("Entre ton email pour être alerté à l’ouverture :");
-      if (email && /\S+@\S+\.\S+/.test(email)) alert("Tu seras alerté à l’ouverture !");
-      else if (email) alert("Email invalide.");
-    });
+  clearInterval(countdown);
+  let timeLeft = 5 * 60;
+  const progress = document.getElementById('progress');
 
-    // -------- NAVIGATION INTERNE --------
-    function showPage(pageId) {
-      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-      document.getElementById(pageId).classList.add("active");
-    }
+  countdown = setInterval(() => {
+    const min = Math.floor(timeLeft / 60);
+    const sec = timeLeft % 60;
+    document.getElementById('timer').textContent = `${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+    progress.style.width = ((5 * 60 - timeLeft) / (5 * 60)) * 100 + "%";
 
-    // -------- TÉLÉCHARGEMENT AVEC COMPTE À REBOURS --------
-    let countdown;
-    function openFile(name, url) {
-      showPage('filePage');
-      document.getElementById('fileName').textContent = "Téléchargement : " + name;
-      document.getElementById('downloadBtn').disabled = true;
-      document.getElementById('downloadBtn').textContent = "En attente...";
-      document.getElementById('timer').textContent = "05:00";
-      document.getElementById('progress').style.width = "0%";
-
+    if (timeLeft <= 0) {
       clearInterval(countdown);
-      let timeLeft = 5 * 60;
-      const progress = document.getElementById('progress');
-
-      countdown = setInterval(() => {
-        const min = Math.floor(timeLeft / 60);
-        const sec = timeLeft % 60;
-        document.getElementById('timer').textContent = `${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
-        progress.style.width = ((5 * 60 - timeLeft) / (5 * 60)) * 100 + "%";
-
-        if (timeLeft <= 0) {
-          clearInterval(countdown);
-          document.getElementById('downloadBtn').disabled = false;
-          document.getElementById('downloadBtn').textContent = "Télécharger maintenant";
-          document.getElementById('downloadBtn').onclick = () => window.location.href = url;
-          progress.style.width = "100%";
-        }
-        timeLeft--;
-      }, 1000);
+      document.getElementById('downloadBtn').disabled = false;
+      document.getElementById('downloadBtn').textContent = "Télécharger maintenant";
+      document.getElementById('downloadBtn').onclick = () => window.location.href = url;
+      progress.style.width = "100%";
     }
-  </script>
+    timeLeft--;
+  }, 1000);
+}
+</script>
 </body>
 </html>
