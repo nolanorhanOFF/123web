@@ -179,8 +179,13 @@
 </head>
 <body>
 
-  <!-- PAGE COMPTE À REBOURS -->
-  <div id="coming-soon">
+<div id="coming-soon">
+  <!-- 🎞️ Vidéo de fond -->
+  <video id="backgroundVideo" autoplay muted loop playsinline>
+    <source src="Minuteur.mp4" type="video/mp4">
+  </video>
+
+  <div class="coming-content">
     <h1>🚧 NolannaxStudio arrive bientôt 🚧</h1>
     <div id="countdown">
       <div class="time-box"><div class="value" id="days">00</div><div class="label">Jours</div></div>
@@ -191,6 +196,8 @@
     <button id="alertBtn">M'alerter</button>
     <button id="devBtn">Accès développeur</button>
   </div>
+</div>
+
 
   <!-- SITE PRINCIPAL -->
   <div id="main-site" style="display:none;">
