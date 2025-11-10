@@ -227,6 +227,22 @@ footer {
   </div>
 </div>
 
+<!-- Protection contre inspection et clic droit -->
+<script>
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.onkeydown = e => {
+  if (
+    e.key === "F12" ||
+    (e.ctrlKey && e.shiftKey && e.key === "I") ||
+    (e.ctrlKey && e.shiftKey && e.key === "J") ||
+    (e.ctrlKey && e.key === "U")
+  ) {
+    e.preventDefault();
+    alert("🚫 L’accès au code source est désactivé sur ce site.");
+  }
+};
+</script>
+
 <!-- SITE PRINCIPAL -->
 <div id="main-site" style="display:none;">
   <header>NolannaxStudio</header>
